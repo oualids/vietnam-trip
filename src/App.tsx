@@ -46,6 +46,7 @@ interface Day {
     location: string;
     transport: string;
     desc: string;
+    timeline?: { time: string; activity: string }[];
 }
 
 // --- DATA ---
@@ -151,25 +152,194 @@ const cities: City[] = [
     }
 ];
 
-const itineraryDays: Day[] = [
-    { day: 1, date: 'June 30', title: 'Arrival in Chaos', location: 'Hanoi', transport: 'Flight -> Taxi', desc: 'Arrive in Hanoi. Check into your Old Quarter homestay. Get lost in the 36 streets, grab a bowl of Pho, and sit on a plastic stool for Bia Hoi (fresh beer) to people-watch.' },
-    { day: 2, date: 'July 1', title: 'Hidden Cafes & Culture', location: 'Hanoi', transport: 'Walk / Grab', desc: 'Explore the cafe culture. Try egg coffee at Cafe Giang. Walk around Hoan Kiem Lake. Evening street food tour to get your palate adjusted to northern flavors.' },
-    { day: 3, date: 'July 2', title: 'Escape to the Karsts', location: 'Ninh Binh', transport: 'Train (2.5 hrs)', desc: 'Morning train to Ninh Binh. Check into your bungalow near Tam Coc. Rent a bicycle and ride through the stunning limestone karsts and rice paddies as the sun sets.' },
-    { day: 4, date: 'July 3', title: 'Boats & Viewpoints', location: 'Ninh Binh', transport: 'Bicycle / Grab', desc: 'Early morning Trang An boat ride (avoid the crowds). In the afternoon, climb the 500 steps of Hang Mua for a breathtaking panoramic view of the river and mountains.' },
-    { day: 5, date: 'July 4', title: 'Rural Life & Night Train', location: 'Ninh Binh', transport: 'Grab -> Night Train', desc: 'A slow day. Cycle to Thai Vi temple, drink coffee by the lotus ponds. Late evening (around 9 PM), board the overnight sleeper train heading south to Hue.' },
-    { day: 6, date: 'July 5', title: 'The Imperial City', location: 'Hue', transport: 'Arrival via Train', desc: 'Arrive in Hue around 8 AM. Drop bags at your riverside villa. In the afternoon, explore the massive, historic Imperial Citadel. Dinner must be Bun Bo Hue.' },
-    { day: 7, date: 'July 6', title: 'Dragons & Tombs', location: 'Hue', transport: 'Grab / Taxi', desc: 'Take a Grab to visit the famous (and slightly eerie) abandoned water park at Thuy Tien Lake. Later, visit the spectacular royal tombs like Khai Dinh.' },
-    { day: 8, date: 'July 7', title: 'The Hai Van Pass', location: 'Da Nang', transport: 'Train (3 hrs)', desc: 'Take the daytime train from Hue to Da Nang. This is the most scenic train ride in Vietnam, hugging the coastline over the mountains. Arrive in Da Nang and meet your friend!' },
-    { day: 9, date: 'July 8', title: 'Settling into Da Nang', location: 'Da Nang', transport: 'Grab', desc: 'Beach day at My Khe. Catch up with your friend, explore their favorite local spots via Grab, and enjoy a massive fresh seafood dinner by the ocean.' },
-    { day: 10, date: 'July 9', title: 'Monkey Mountain', location: 'Da Nang', transport: 'Grab / Friend', desc: 'Explore the Son Tra Peninsula. Spot the rare Red-shanked douc langurs (monkeys), visit the Lady Buddha, and find hidden coves.' },
-    { day: 11, date: 'July 10', title: 'Lanterns & History', location: 'Da Nang / Hoi An', transport: 'Grab (45m)', desc: 'Take a late afternoon trip down to Hoi An ancient town. The architecture is stunning. Wait for sunset to see the thousands of silk lanterns light up the river.' },
-    { day: 12, date: 'July 11', title: 'Nam O Fishing Village', location: 'Da Nang', transport: 'Standard Grab', desc: 'Take a Grab north to Nam O Village. See traditional fish sauce made in giant vats, watch fishermen repair nets, and try the local specialty: Goi Ca.' },
-    { day: 13, date: 'July 12', title: 'Cam Kim Artisans', location: 'Da Nang', transport: 'Grab & Bicycle', desc: 'Take a Grab south towards Hoi An. Rent bicycles near the bridge and ride into Cam Kim Island to see families doing traditional woodcarving and weaving.' },
-    { day: 14, date: 'July 13', title: 'Tam Thanh Mural Coast', location: 'Da Nang', transport: 'GrabRent (Half-Day)', desc: 'Hire a driver via GrabRent for a 1.5-hour ride south. They will wait while you explore the Tam Thanh fishing community beautifully painted with art.' },
-    { day: 15, date: 'July 14', title: 'Nature & Waterfalls', location: 'Da Nang', transport: 'GrabRent', desc: 'Use GrabRent to head out to Hoa Phu Thanh or local waterfalls/springs just outside the city for a swim in nature, away from the coastal heat.' },
-    { day: 16, date: 'July 15', title: 'Final Beach Day', location: 'Da Nang', transport: 'Walk', desc: 'Your last full day in Da Nang. Enjoy a final beach sunrise, a farewell dinner with your friend, and pack up.' },
-    { day: 17, date: 'July 16', title: 'Return to the North', location: 'Hanoi', transport: 'Flight (1.5 hrs)', desc: 'Take a cheap, quick domestic flight from Da Nang back to Hanoi. One last evening to grab street food, buy souvenirs, and soak in the Old Quarter energy.' },
-    { day: 18, date: 'July 17', title: 'Departure', location: 'Hanoi', transport: 'Grab to Airport', desc: 'Enjoy a final Vietnamese iced coffee (Ca Phe Sua Da). Head to Noi Bai Airport for your flight home. Safe travels!' }
+export const itineraryDays: Day[] = [
+    {
+        day: 1, date: 'June 30', title: 'Arrival in Tay Ho', location: 'Hanoi', transport: 'Flight -> Taxi',
+        desc: 'Arrive in Hanoi. Check into Moonlit Suites in the quieter Tay Ho (West Lake) district. Take a taxi down to the Old Quarter, get lost in the 36 streets, grab a bowl of Pho, and sit on a plastic stool for Bia Hoi.',
+        timeline: [
+            { time: '02:00 PM', activity: 'Land at Noi Bai (HAN). Book Grab taxi using airport Wi-Fi.' },
+            { time: '03:30 PM', activity: 'Check into Moonlit Suites Hotel in the West Lake area.' },
+            { time: '05:00 PM', activity: 'Grab a taxi to the Old Quarter to absorb the chaos.' },
+            { time: '07:00 PM', activity: 'Sit at Bia Hoi corner. Drink fresh beer and meet locals/travelers.' }
+        ]
+    },
+    {
+        day: 2, date: 'July 1', title: 'Mausoleum & Hidden Cafes', location: 'Hanoi', transport: 'Walk / Grab',
+        desc: 'Early morning visit to the Ho Chi Minh Mausoleum. Explore the cafe culture, try egg coffee at Cafe Giang, and take an evening street food tour to get your palate adjusted to northern flavors.',
+        timeline: [
+            { time: '07:30 AM', activity: 'Arrive early at the Ho Chi Minh Mausoleum to beat the queues.' },
+            { time: '09:30 AM', activity: 'Walk or Grab towards the Old Quarter. Find Cafe Giang for Egg Coffee.' },
+            { time: '12:00 PM', activity: 'Lunch: Authentic street-side Bun Cha.' },
+            { time: '03:00 PM', activity: 'Wander around Hoan Kiem Lake.' },
+            { time: '06:00 PM', activity: 'Evening street food wandering or a guided food tour.' }
+        ]
+    },
+    {
+        day: 3, date: 'July 2', title: 'Escape to the Karsts', location: 'Ninh Binh', transport: 'Train (2.5 hrs)',
+        desc: 'Morning train to Ninh Binh. Check into Gecko Backpackers near Tam Coc. Rent a bicycle and ride through the stunning limestone karsts and rice paddies as the sun sets.',
+        timeline: [
+            { time: '08:00 AM', activity: 'Board the train from Hanoi Railway Station heading south.' },
+            { time: '10:30 AM', activity: 'Arrive in Ninh Binh. Take a short taxi to Gecko Backpackers in Tam Coc.' },
+            { time: '12:00 PM', activity: 'Lunch at the hostel and hang out by their huge pool.' },
+            { time: '03:30 PM', activity: 'Rent bicycles. Ride through the flat, quiet rice paddies.' },
+            { time: '06:30 PM', activity: 'Join the family dinner at the hostel or try the local goat meat.' }
+        ]
+    },
+    {
+        day: 4, date: 'July 3', title: 'Boats & Viewpoints', location: 'Ninh Binh', transport: 'Bicycle / Grab',
+        desc: 'Early morning Trang An boat ride (avoid the crowds). In the afternoon, climb the 500 steps of Hang Mua for a breathtaking panoramic view of the river and mountains.',
+        timeline: [
+            { time: '07:00 AM', activity: 'Arrive at Trang An for the boat tour. (Crucial: Beating the heat/crowds).' },
+            { time: '10:30 AM', activity: 'Return to Gecko Backpackers. Relax by the pool and escape the midday sun.' },
+            { time: '04:00 PM', activity: 'Head to Hang Mua. Climb the 500 stone steps.' },
+            { time: '05:30 PM', activity: 'Watch the sunset from the dragon statue at the peak.' },
+            { time: '07:30 PM', activity: 'Beers and socializing with other travelers at the hostel bar.' }
+        ]
+    },
+    {
+        day: 5, date: 'July 4', title: 'Rural Life & Night Train', location: 'Ninh Binh', transport: 'Grab -> Night Train',
+        desc: 'A slow day. Cycle to Thai Vi temple, drink coffee by the lotus ponds. Late evening (around 9 PM), board the overnight sleeper train heading south to Hue.',
+        timeline: [
+            { time: '08:30 AM', activity: 'Leisurely breakfast. Checkout, but leave bags at reception.' },
+            { time: '10:00 AM', activity: 'Cycle to Thai Vi temple and the surrounding lotus ponds.' },
+            { time: '02:00 PM', activity: 'Read, swim, and relax at the hostel communal area.' },
+            { time: '08:00 PM', activity: 'Grab a taxi to Ninh Binh train station.' },
+            { time: '09:00 PM', activity: 'Board the overnight Reunification Express sleeper train to Hue.' }
+        ]
+    },
+    {
+        day: 6, date: 'July 5', title: 'The Imperial City', location: 'Hue', transport: 'Arrival via Train',
+        desc: 'Arrive in Hue around 8 AM. Drop bags at Hue River Side Villa. In the afternoon, explore the massive, historic Imperial Citadel. Dinner must be Bun Bo Hue.',
+        timeline: [
+            { time: '08:30 AM', activity: 'Train arrives in Hue. Grab to Hue River Side Villa.' },
+            { time: '10:00 AM', activity: 'Coffee along the Perfume River.' },
+            { time: '02:00 PM', activity: 'Explore the massive Imperial Citadel (former capital).' },
+            { time: '07:00 PM', activity: 'Dinner: Find an authentic spot for Bun Bo Hue (spicy beef noodles).' }
+        ]
+    },
+    {
+        day: 7, date: 'July 6', title: 'Dragons & Tombs', location: 'Hue', transport: 'Grab / Taxi',
+        desc: 'Take a Grab to visit the famous (and slightly eerie) abandoned water park at Thuy Tien Lake. Later, visit the spectacular royal tombs like Khai Dinh.',
+        timeline: [
+            { time: '07:30 AM', activity: 'Grab ride to Thuy Tien Lake (Abandoned Water Park). Explore the dragon.' },
+            { time: '11:00 AM', activity: 'Visit the spectacular, mosaic-covered Tomb of Khai Dinh.' },
+            { time: '01:30 PM', activity: 'Lunch back in the city.' },
+            { time: '04:00 PM', activity: 'Walk around the local Dong Ba Market.' }
+        ]
+    },
+    {
+        day: 8, date: 'July 7', title: 'The Hai Van Pass', location: 'Da Nang', transport: 'Train (3 hrs)',
+        desc: 'Take the daytime train from Hue to Da Nang. This is the most scenic train ride in Vietnam, hugging the coastline over the mountains. Arrive in Da Nang, check into Rom Casa Hostel, and meet your friend!',
+        timeline: [
+            { time: '08:30 AM', activity: 'Board the daytime train to Da Nang (Sit on the LEFT side for ocean views).' },
+            { time: '11:30 AM', activity: 'Train crosses the stunning Hai Van Pass coastline.' },
+            { time: '12:30 PM', activity: 'Arrive Da Nang. Check into Rom Casa Hostel (made of shipping containers!).' },
+            { time: '02:00 PM', activity: 'Meet up with your friend!' },
+            { time: '03:30 PM', activity: 'Head to My Khe beach for an afternoon swim.' },
+            { time: '07:00 PM', activity: 'Massive local seafood dinner on the beach.' }
+        ]
+    },
+    {
+        day: 9, date: 'July 8', title: 'Monkey Mountain', location: 'Da Nang', transport: 'Grab / Scooter',
+        desc: 'Explore the Son Tra Peninsula. Spot the rare Red-shanked douc langurs (monkeys), visit the Lady Buddha, and find hidden coves.',
+        timeline: [
+            { time: '07:00 AM', activity: 'Head to Son Tra Peninsula (Monkey Mountain) early for best wildlife spotting.' },
+            { time: '09:00 AM', activity: 'Visit the towering Lady Buddha statue.' },
+            { time: '11:00 AM', activity: 'Find a quiet, hidden beach cove along the peninsula road.' },
+            { time: '02:00 PM', activity: 'Return to city for late lunch. Afternoon relaxing with friend.' }
+        ]
+    },
+    {
+        day: 10, date: 'July 9', title: 'Nam O Fishing Village', location: 'Da Nang', transport: 'Standard Grab',
+        desc: 'Take a Grab north to Nam O Village. See traditional fish sauce made in giant vats, watch fishermen repair nets, and try the local specialty: Goi Ca.',
+        timeline: [
+            { time: '07:30 AM', activity: 'Grab car/bike north to Nam O Village.' },
+            { time: '08:30 AM', activity: 'Walk the village. See the giant wooden vats brewing Nuoc Mam (fish sauce).' },
+            { time: '10:30 AM', activity: 'Watch locals repairing fishing nets on the beach.' },
+            { time: '11:30 AM', activity: 'Lunch: You must try "Goi Ca" (local raw fish salad unique to Nam O).' },
+            { time: '01:00 PM', activity: 'Grab back to Da Nang.' }
+        ]
+    },
+    {
+        day: 11, date: 'July 10', title: 'Lanterns & History', location: 'Da Nang / Hoi An', transport: 'Grab (45m)',
+        desc: 'Take a late afternoon trip down to Hoi An ancient town. The architecture is stunning. Wait for sunset to see the thousands of silk lanterns light up the river.',
+        timeline: [
+            { time: '10:00 AM', activity: 'Slow morning. Hit the specialty coffee shops in Da Nang.' },
+            { time: '03:00 PM', activity: 'Grab south to Hoi An Ancient Town.' },
+            { time: '04:00 PM', activity: 'Wander the yellow heritage streets. Check out tailor shops.' },
+            { time: '06:30 PM', activity: 'Sunset: Watch the thousands of silk lanterns light up the river.' },
+            { time: '08:00 PM', activity: 'Dinner in Hoi An (Try Cao Lau noodles) before heading back.' }
+        ]
+    },
+    {
+        day: 12, date: 'July 11', title: 'Cam Kim Artisans', location: 'Da Nang', transport: 'Grab & Bicycle',
+        desc: 'Take a Grab south towards Hoi An. Rent bicycles near the bridge and ride into Cam Kim Island to see families doing traditional woodcarving and weaving.',
+        timeline: [
+            { time: '07:30 AM', activity: 'Grab south, getting dropped off near the Cam Kim bridge.' },
+            { time: '08:30 AM', activity: 'Rent bicycles. Cross into the rural island pathways.' },
+            { time: '10:00 AM', activity: 'Visit family courtyards doing woodcarving and rice-paper making.' },
+            { time: '12:30 PM', activity: 'Local lunch, then grab a ride back to Da Nang.' },
+            { time: '03:00 PM', activity: 'Beach afternoon with your friend.' }
+        ]
+    },
+    {
+        day: 13, date: 'July 12', title: 'Tam Thanh Mural Coast', location: 'Da Nang', transport: 'GrabRent (Half-Day)',
+        desc: 'Hire a driver via GrabRent for a 1.5-hour ride south. They will wait while you explore the Tam Thanh fishing community beautifully painted with art.',
+        timeline: [
+            { time: '07:00 AM', activity: 'Book a "GrabRent" for a 6-hour block. Drive 1.5 hrs south.' },
+            { time: '08:30 AM', activity: 'Arrive at Tam Thanh. Walk through the incredibly authentic fishing village.' },
+            { time: '10:00 AM', activity: 'Photograph the beautiful murals painted directly onto the local houses.' },
+            { time: '11:30 AM', activity: 'Eat fresh seafood on the completely empty local beach.' },
+            { time: '01:00 PM', activity: 'Driver takes you back to Da Nang.' }
+        ]
+    },
+    {
+        day: 14, date: 'July 13', title: 'Local Life & Open Schedule', location: 'Da Nang', transport: 'Walk',
+        desc: 'A completely open day to sync up with your friend. Explore local markets, go surfing, or just relax at a coastal cafe.',
+        timeline: [
+            { time: '09:00 AM', activity: 'Sleep in. Grab a local Banh Mi for breakfast.' },
+            { time: '11:00 AM', activity: 'Explore Han Market or Con Market for local vibes.' },
+            { time: '02:00 PM', activity: 'Open schedule: Hang out with friend, surf, or relax.' }
+        ]
+    },
+    {
+        day: 15, date: 'July 14', title: 'Open Schedule', location: 'Da Nang', transport: 'Local transit',
+        desc: 'Another free day. Let your friend play tour guide, or revisit your favorite beach spots.',
+        timeline: [
+            { time: '09:00 AM', activity: 'Breakfast and coffee.' },
+            { time: '12:00 PM', activity: 'Let your local friend choose the lunch spot.' },
+            { time: '03:00 PM', activity: 'Beach lounging or exploring Da Nang city.' }
+        ]
+    },
+    {
+        day: 16, date: 'July 15', title: 'Final Beach Day', location: 'Da Nang', transport: 'Walk',
+        desc: 'Your last full day in Da Nang. Enjoy a final beach sunrise, a farewell dinner with your friend, and pack up.',
+        timeline: [
+            { time: '05:30 AM', activity: 'Optional: Wake up for the My Khe beach sunrise (it is spectacular and crowded with locals).' },
+            { time: '10:00 AM', activity: 'Last beach swims and sunbathing.' },
+            { time: '07:00 PM', activity: 'Farewell dinner and drinks with your friend.' }
+        ]
+    },
+    {
+        day: 17, date: 'July 16', title: 'Return to the North', location: 'Hanoi', transport: 'Flight (1.5 hrs)',
+        desc: 'Take a quick domestic flight from Da Nang back to Hanoi. Check into Oriental Suites Hotel by the lake. One last evening to grab street food, buy souvenirs, and soak in the Old Quarter energy.',
+        timeline: [
+            { time: '09:00 AM', activity: 'Say goodbyes. Grab to Da Nang Airport (DAD).' },
+            { time: '11:00 AM', activity: 'Short domestic flight to Hanoi (HAN).' },
+            { time: '01:30 PM', activity: 'Check into Oriental Suites Hotel (right near Hoan Kiem Lake).' },
+            { time: '04:00 PM', activity: 'Souvenir shopping: buy coffee beans and local crafts.' },
+            { time: '07:00 PM', activity: 'Final bowl of Pho and a celebratory Bia Hoi.' }
+        ]
+    },
+    {
+        day: 18, date: 'July 17', title: 'Departure', location: 'Hanoi', transport: 'Grab to Airport',
+        desc: 'Enjoy a final Vietnamese iced coffee (Ca Phe Sua Da). Head to Noi Bai Airport for your flight home. Safe travels!',
+        timeline: [
+            { time: '08:00 AM', activity: 'Last Vietnamese iced coffee and street-side breakfast.' },
+            { time: '10:30 AM', activity: 'Pack bags.' },
+            { time: 'TBD', activity: 'Grab taxi to Noi Bai Airport. Trip complete!' }
+        ]
+    }
 ];
 
 export default function App() {
@@ -278,7 +448,19 @@ export default function App() {
                                     <p className="text-stone-600 text-lg leading-relaxed">
                                         {currentDayData.desc}
                                     </p>
+
                                 </div>
+                                {currentDayData.timeline && (
+                                    <div className="mt-5 border-l-2 border-emerald-200 ml-2 space-y-4 pt-2">
+                                        {currentDayData.timeline.map((event, idx) => (
+                                            <div key={idx} className="relative pl-5">
+                                                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 absolute -left-[21px] top-1.5 border-2 border-white shadow-sm"></div>
+                                                <p className="font-bold text-emerald-700 text-xs mb-0.5">{event.time}</p>
+                                                <p className="text-stone-600 text-sm leading-relaxed">{event.activity}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                                 <div className="mt-8 flex gap-3">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-100 text-stone-700 rounded-lg text-sm font-medium">
                     <Sun size={16} className="text-amber-500" /> Day {currentDayData.day} of 18

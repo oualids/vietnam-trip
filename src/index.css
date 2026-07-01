@@ -122,10 +122,10 @@ It injects Tailwind's base styles, components, and utility classes.
 /* Custom utility to hide scrollbars but keep functionality on the tabs */
 @layer utilities {
 .hide-scrollbar {
--ms-overflow-style: none;  / IE and Edge /
-scrollbar-width: none;  / Firefox /
+-ms-overflow-style: none;
+scrollbar-width: none;
 }
 .hide-scrollbar::-webkit-scrollbar {
-display: none; / Chrome, Safari and Opera */
+display: none;
 }
 }
